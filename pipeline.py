@@ -7,6 +7,10 @@ import base64
 import tempfile
 import gdown
 
+import logging
+
+logging.getLogger('tensorflow').setLevel(logging.ERROR)
+
 def download_file_from_google_drive(file_id, destination):
     try:
         url = f"https://drive.google.com/uc?export=download&id={file_id}"
