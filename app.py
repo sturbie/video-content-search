@@ -1,6 +1,8 @@
 import streamlit as st
 import tempfile
 import os
+os.environ["STREAMLIT_WATCH_FOR_CHANGES"] = "false"
+
 import cv2
 import numpy as np
 from nlp_pipeline import predict
