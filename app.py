@@ -5,6 +5,29 @@ os.environ["STREAMLIT_WATCH_FOR_CHANGES"] = "false"
 
 import cv2
 import numpy as np
+
+#Download from Google Drive
+import gdown
+
+def download_file_from_google_drive(file_id, destination):
+    try:
+        url = f"https://drive.google.com/uc?export=download&id={file_id}"
+        gdown.download(url, destination, quiet=False)
+    except Exception as e:
+        st.write(f"Failed to download {destination} using gdown. Error: {e}")
+        st.write("Trying to download using curl...")
+        os.system(f"curl -L {url} -o {destination}")
+
+FILES_TO_DOWNLOAD = {
+    "nlp_cv_ner_model": "1-OTsvwA9vmqN6LhmWSy3dXYCcugo4ff8",
+    "yolov4-tiny.weights": "1jnMvCvtvTYBBf62-uH1OpG1wzQmCTk4W"
+}
+
+for filename, file_id in FILES_TO_DOWNLOAD.items():
+    if not os.path.exists(filename):
+        st.write(f"Downloading {filename}...")
+        download_file_from_google_drive(file_id, filename)
+
 from nlp_pipeline import predict
 from cv_pipeline import process_image_with_classes
 
