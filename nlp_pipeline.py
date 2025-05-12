@@ -4,8 +4,8 @@ import numpy as np
 
 # Load trained model
 MODEL_PATH = "./nlp_cv_ner_model"
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-model = AutoModelForTokenClassification.from_pretrained(MODEL_PATH)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, local_files_only=True)
+model = AutoModelForTokenClassification.from_pretrained(MODEL_PATH, local_files_only=True)
 model.eval()
 
 ID2LABEL = model.config.id2label
